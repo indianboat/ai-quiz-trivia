@@ -12,9 +12,11 @@
     "clsx": "^2.1.1",
     "framer-motion": "^11.1.9",
     "next": "14.2.3",
+    "openai": "^4.45.0",
     "preline": "^2.1.0",
     "react": "^18",
     "react-dom": "^18",
+    "sonner": "^1.4.41",
     "tailwind-merge": "^2.3.0"
   },
   "devDependencies": {

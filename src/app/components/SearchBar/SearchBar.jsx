@@ -1,11 +1,33 @@
-import React from 'react'
+"use client";
 
-const SearchBar = ({ searchValue, setSearchValue }) => {
+import { generateTrivia } from '@/actions/generateTrivia';
+import { useRouter } from 'next/navigation';
+import React, { useState } from 'react';
+import { toast } from 'sonner';
 
+const SearchBar = () => {
+
+  const router = useRouter();
+  const [searchTopic, setSearchTopic] = useState("");
+  const [quizLoading, setQuizLoading] = useState(false);
+
+  const handleFormSubmit = async (event) => {
+    event.preventDefault();
+
+    setQuizLoading(true);
+    const res = await generateTrivia(searchTopic, 20);
+    setQuizLoading(false);
+
+    if (res.success) {
+      toast.success("Quiz Generated")
+      // router.push(`/quiz/${searchTopic.replaceAll(" ", "-")}`);
+
+    }
+  }
 
   return (
     <>
-      <div className="relative flex overflow-hidden py-8">
+      <div className="relative flex overflow-hidden py-8 px-4 z-40">
         <div className="max-w-[85rem] mx-auto">
           <div className="text-center">
             <h1 className="md:text-3xl text-2xl font-bold text-gray-800 dark:text-neutral-200">
@@ -16,27 +38,31 @@ const SearchBar = ({ searchValue, setSearchValue }) => {
             </p>
             <div className="mt-7 sm:mt-12 mx-auto max-w-xl relative">
               {/* Form */}
-              <form>
-                <div className="relative z-10 flex space-x-3 p-3 bg-white border rounded-lg shadow-lg shadow-gray-100 dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-gray-900/20">
-                  <div className="flex-[1_0_0%] ">
+              <form onSubmit={handleFormSubmit}>
+                <div className="relative z-10 flex space-x-3 p-3 bg-white border rounded-2xl shadow-lg shadow-gray-100 dark:bg-neutral-900 dark:border-neutral-700 dark:shadow-gray-900/20">
+                  <div className="flex-[1_0_0%]">
                     <label
-                      htmlFor="hs-search-article-1"
+                      htmlFor="search-topic"
                       className="block text-sm text-gray-700 font-medium dark:text-white"
                     >
                       <span className="sr-only">Search any topic...</span>
                     </label>
                     <input
-                      type="email"
-                      name="hs-search-article-1"
-                      id="hs-search-article-1"
-                      className="py-2.5 px-4 block w-full border-transparent rounded-lg focus:border-blue-500 focus:ring-blue-500 dark:bg-neutral-900 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
-                      placeholder="Search article"
+                      type="text"
+                      name="search-topic"
+                      id="search-topic"
+                      value={searchTopic}
+                      className="py-2.5 px-4 outline-none border-2 border-neutral-200 block w-full border-transparent rounded-xl focus:border-lime-600 focus:ring-lime-500 dark:bg-neutral-900 dark:border-transparent dark:text-neutral-400 dark:placeholder-neutral-500 dark:focus:ring-neutral-600"
+                      placeholder="Search any topic..."
+                      minLength={2}
+                      required
+                      onChange={(event) => setSearchTopic(event.target.value)}
                     />
                   </div>
-                  <div className="flex-[0_0_auto] ">
-                    <a
-                      className="size-[46px] inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-lg border border-transparent bg-blue-600 text-white hover:bg-blue-700 disabled:opacity-50 disabled:pointer-events-none"
-                      href="#"
+                  <div className="flex-[0_0_auto]">
+                    <button
+                      type="submit"
+                      className="size-[46px] md:w-20 w-12 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-xl border border-transparent bg-lime-600 text-white hover:bg-lime-700 disabled:opacity-50 disabled:pointer-events-none transition-all"
                     >
                       <svg
                         className="flex-shrink-0 size-5"
@@ -53,7 +79,7 @@ const SearchBar = ({ searchValue, setSearchValue }) => {
                         <circle cx={11} cy={11} r={8} />
                         <path d="m21 21-4.3-4.3" />
                       </svg>
-                    </a>
+                    </button>
                   </div>
                 </div>
               </form>
@@ -61,7 +87,7 @@ const SearchBar = ({ searchValue, setSearchValue }) => {
               {/* SVG Element */}
               <div className="hidden md:block absolute top-0 end-0 -translate-y-12 translate-x-20">
                 <svg
-                  className="w-16 h-auto text-orange-500"
+                  className="w-16 h-auto text-lime-500"
                   width={121}
                   height={135}
                   viewBox="0 0 121 135"
@@ -92,7 +118,7 @@ const SearchBar = ({ searchValue, setSearchValue }) => {
               {/* SVG Element */}
               <div className="hidden md:block absolute bottom-0 start-0 translate-y-10 -translate-x-32">
                 <svg
-                  className="w-40 h-auto text-cyan-500"
+                  className="w-40 h-auto text-lime-700"
                   width={347}
                   height={188}
                   viewBox="0 0 347 188"

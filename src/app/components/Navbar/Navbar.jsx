@@ -4,7 +4,7 @@ import React from 'react'
 const Navbar = () => {
   return (
     <>
-      <header className="z-40 w-full 2xl:container mx-auto border-b sticky top-0 bg-white/90 backdrop-blur-[3px]">
+      <header className="z-50 w-full 2xl:container mx-auto flex border-b sticky top-0 bg-white/90 backdrop-blur-[3px] antialiased">
         <nav className="max-w-7xl w-full flex flex-wrap md:grid md:grid-cols-12 basis-full items-center px-4 md:px-6 mx-auto py-4" aria-label="navbar">
           <div className="md:col-span-3">
             <Link className="flex-none rounded-xl text-2xl inline-block font-semibold focus:outline-none text-black"
@@ -14,7 +14,7 @@ const Navbar = () => {
           </div>
 
           <div className="flex items-center gap-x-2 ms-auto py-1 md:order-3 md:col-span-3">
-            <Link href={"/"} className="py-2 px-3 lg:flex md:flex sm:hidden hidden items-center gap-x-2 text-sm font-medium rounded-xl border border-transparent bg-lime-400 text-gray-800 hover:bg-lime-500 transition disabled:opacity-50 disabled:pointer-events-none focus:outline-none focus:bg-lime-500">
+            <Link href={"/"} className="py-2 px-3 lg:flex md:flex sm:hidden hidden items-center gap-x-2 text-sm font-medium rounded-xl border border-transparent bg-lime-400 text-gray-800 hover:bg-lime-500 transition disabled:opacity-50 disabled:pointer-events-none focus:outline-none">
               Sign up
             </Link>
 

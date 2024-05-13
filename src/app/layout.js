@@ -2,6 +2,7 @@ import PrelineScript from "./components/PrelineScript/PrelineScript";
 import { Poppins } from "next/font/google";
 import "./globals.css";
 import Navbar from "./components/Navbar/Navbar";
+import { Toaster } from "sonner";
 
 const poppins = Poppins({ subsets: ["latin"], weight: ["100", "200", "300", "400", "500", "600", "700", "800", "900"] });
 
@@ -17,6 +18,7 @@ export default function RootLayout({ children }) {
         <Navbar />
         {children}
         <PrelineScript />
+        <Toaster/>
       </body>
     </html>
   );
