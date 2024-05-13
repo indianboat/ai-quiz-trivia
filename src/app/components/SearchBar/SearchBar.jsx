@@ -4,12 +4,17 @@ import { generateTrivia } from '@/actions/generateTrivia';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { toast } from 'sonner';
+import Spinner from '../Loading/Spinner';
+import { SearchIcon } from '../Svg/Icons';
+import { useTriviaQuiz } from '@/store/quiz';
 
 const SearchBar = () => {
 
   const router = useRouter();
   const [searchTopic, setSearchTopic] = useState("");
   const [quizLoading, setQuizLoading] = useState(false);
+
+  const { setQuizData } = useTriviaQuiz();
 
   const handleFormSubmit = async (event) => {
     event.preventDefault();
@@ -20,7 +25,8 @@ const SearchBar = () => {
 
     if (res.success) {
       toast.success("Quiz Generated")
-      // router.push(`/quiz/${searchTopic.replaceAll(" ", "-")}`);
+      setQuizData(JSON.parse(res.data))
+      router.push(`/quiz/${searchTopic.replaceAll(" ", "-")}?q=${1}`);
 
     }
   }
@@ -62,23 +68,12 @@ const SearchBar = () => {
                   <div className="flex-[0_0_auto]">
                     <button
                       type="submit"
+                      disabled={quizLoading}
                       className="size-[46px] md:w-20 w-12 inline-flex justify-center items-center gap-x-2 text-sm font-semibold rounded-xl border border-transparent bg-lime-600 text-white hover:bg-lime-700 disabled:opacity-50 disabled:pointer-events-none transition-all"
                     >
-                      <svg
-                        className="flex-shrink-0 size-5"
-                        xmlns="http://www.w3.org/2000/svg"
-                        width={24}
-                        height={24}
-                        viewBox="0 0 24 24"
-                        fill="none"
-                        stroke="currentColor"
-                        strokeWidth={2}
-                        strokeLinecap="round"
-                        strokeLinejoin="round"
-                      >
-                        <circle cx={11} cy={11} r={8} />
-                        <path d="m21 21-4.3-4.3" />
-                      </svg>
+                      {
+                        quizLoading ? <Spinner /> : <SearchIcon />
+                      }
                     </button>
                   </div>
                 </div>

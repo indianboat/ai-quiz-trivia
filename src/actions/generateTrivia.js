@@ -27,14 +27,9 @@ export async function generateTrivia(topic, count) {
     });
 
     const jsonText = completion.choices[0].text.trim();
+    const quiz = JSON.parse(jsonText);
 
-    // console.log(completion.choices[0].text.trim());
-
-    const data = JSON.parse(jsonText);
-
-    // console.log(data);
-
-    if (data.length > 0) {
+    if (quiz.length > 0) {
       return {
         success: true,
         message: "Quiz Generated",

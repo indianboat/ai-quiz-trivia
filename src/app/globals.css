@@ -31,3 +31,17 @@ body {
     text-wrap: balance;
   }
 } */
+
+@keyframes spin {
+  to{
+    transform: rotate(360deg);
+  }
+}
+
+.animate-spin{
+  animation: spin 1.5s linear infinite;
+}
+
+.hs-stepper-success{
+  @apply !bg-blue-600 !text-white
+}
