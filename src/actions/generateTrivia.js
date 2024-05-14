@@ -5,11 +5,7 @@ import OpenAI from "openai";
 export async function generateTrivia(topic, count) {
   try {
 
-    // console.log(topic);
-
     const openai = new OpenAI({ apiKey: process.env.OPENAI_KEY })
-
-    // const prompt_text = `Generate ${count} short multi-choice question about topic: ${topic} with four options and one correct answer and do not repeat same question. \n`;
 
     const prompt_text = `Generate a short multiple-choice trivia quiz with ${count} questions and 4 options for each question about ${topic},
     the output should be expressed in JSON as an array of questions, each question should be an object with key named "question", "options" and "correctOption" \n`;

@@ -27,7 +27,9 @@ const SearchBar = () => {
       toast.success("Quiz Generated")
       setQuizData(JSON.parse(res.data));
       router.push(`/quiz/${searchTopic.replaceAll(" ", "-")}?q=${1}`);
-
+    }
+    else {
+      toast.error(res.message)
     }
   }
 
