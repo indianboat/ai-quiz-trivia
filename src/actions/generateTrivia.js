@@ -17,7 +17,7 @@ export async function generateTrivia(topic, count) {
     const completion = await openai.completions.create({
       model: "gpt-3.5-turbo-instruct",
       prompt: prompt_text,
-      max_tokens: 2048,
+      max_tokens: 3072,
       n: 1,
       top_p: 1,
       // stop: ['\n'],

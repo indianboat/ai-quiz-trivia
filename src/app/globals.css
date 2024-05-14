@@ -32,16 +32,100 @@ body {
   }
 } */
 
+body {
+  scroll-behavior: smooth;
+  transition: 0.6s;
+  min-height: 100vh;
+  display: flex;
+  flex-direction: column;
+}
+
 @keyframes spin {
-  to{
+  to {
     transform: rotate(360deg);
   }
 }
 
-.animate-spin{
+.animate-spin {
   animation: spin 1.5s linear infinite;
 }
 
-.hs-stepper-success{
-  @apply !bg-blue-600 !text-white
+.hs-stepper-success {
+  @apply !bg-blue-600 !text-white;
+}
+
+.spinner {
+  width: 56px;
+  height: 56px;
+  border-radius: 50%;
+  background: radial-gradient(farthest-side, #659614 94%, #0000) top/9px 9px
+      no-repeat,
+    conic-gradient(#0000 30%, #659614);
+  -webkit-mask: radial-gradient(farthest-side, #0000 calc(100% - 9px), #000 0);
+  animation: full-spinner 1s infinite linear;
+}
+
+@keyframes full-spinner {
+  100% {
+    transform: rotate(1turn);
+  }
+}
+
+.custom-button {
+  padding: 8px 40px;
+  border-radius: 10px;
+  border: 0;
+  background-color: rgb(255, 56, 86);
+  letter-spacing: 1.5px;
+  font-size: 15px;
+  transition: all 0.3s ease;
+  box-shadow: rgb(201, 46, 70) 0px 10px 0px 0px;
+  color: hsl(0, 0%, 100%);
+  cursor: pointer;
+}
+
+.custom-button:hover {
+  box-shadow: rgb(201, 46, 70) 0px 7px 0px 0px;
+}
+
+.custom-button:active {
+  background-color: rgb(255, 56, 86);
+  box-shadow: rgb(201, 46, 70) 0px 0px 0px 0px;
+  transform: translateY(5px);
+  transition: 200ms;
+}
+.custom-button:disabled,
+.custom-button:disabled:active,
+.custom-button:disabled:hover {
+  box-shadow: rgb(201, 46, 70) 0px 10px 0px 0px;
+  transform: none;
+  cursor: not-allowed;
+  background-color: rgb(219, 80, 101);
+}
+
+.submit-btn{
+  background-color: rgb(58, 143, 9);
+  box-shadow: rgb(33, 75, 9) 0px 10px 0px 0px;
+}
+.submit-btn:hover{
+  box-shadow: rgb(33, 75, 9) 0px 7px 0px 0px;
+}
+.submit-btn:active{
+  background-color: rgb(58, 143, 9);
+  box-shadow: rgb(33, 75, 9) 0px 0px 0px 0px;
+  transform: translateY(5px);
+  transition: 200ms;
+}
+
+.submit-btn:disabled,
+.submit-btn:disabled:active,
+.submit-btn:disabled:hover {
+  box-shadow: rgba(33, 75, 9, 0.685) 0px 10px 0px 0px;
+  transform: none;
+  cursor: not-allowed;
+  background-color: rgba(58, 143, 9, 0.575);
+}
+
+.footer{
+  margin-top: auto;
 }

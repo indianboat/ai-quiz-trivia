@@ -11,7 +11,6 @@ const QuizQuestionCard = ({ quiz, index, currentQuestionIndex, setCurrentQuestio
   const [result, setResult] = useState("");
 
   const correctOption = quiz?.correctOption;
-  // console.log(quiz);
 
   const radioInputs = document.querySelectorAll('input[type="radio"]');
 
