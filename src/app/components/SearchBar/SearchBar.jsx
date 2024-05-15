@@ -1,12 +1,13 @@
 "use client";
 
-import { generateTrivia } from '@/actions/generateTrivia';
+// import { generateTrivia } from '@/actions/generateTrivia';
 import { useRouter } from 'next/navigation';
 import React, { useState } from 'react';
 import { toast } from 'sonner';
 import Spinner from '../Loading/Spinner';
 import { Design1, Design2, SearchIcon } from '../Svg/Icons';
 import { useTriviaQuiz } from '@/store/quiz';
+import { count } from '@/utils/constant';
 
 const SearchBar = () => {
 
@@ -20,16 +21,25 @@ const SearchBar = () => {
     event.preventDefault();
 
     setQuizLoading(true);
-    const res = await generateTrivia(searchTopic, 20);
+    // const res = await generateTrivia(searchTopic, 20);
+    const res = await fetch(`/api/generate-quiz`, {
+      method: "POST",
+      headers: {
+        "Content-Type": "application/json"
+      },
+      body: JSON.stringify({ topic: searchTopic, count })
+    });
+
+    const data = await res.json();
     setQuizLoading(false);
 
-    if (res.success) {
+    if (res.ok || data.success) {
       toast.success("Quiz Generated")
-      setQuizData(JSON.parse(res.data));
+      setQuizData(data.data.quiz);
       router.push(`/quiz/${searchTopic.replaceAll(" ", "-")}?q=${1}`);
     }
     else {
-      toast.error(res.message)
+      toast.error(data.message);
     }
   }
 

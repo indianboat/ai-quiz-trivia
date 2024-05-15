@@ -2,6 +2,7 @@
 
 import FullPageSpinner from '@/app/components/Loading/FullPageSpinner';
 import NotFound from '@/app/components/NotFound/NotFound';
+import { count } from '@/utils/constant';
 import Link from 'next/link';
 import React, { useEffect, useState } from 'react';
 import RealisticConfetti from "react-canvas-confetti/dist/presets/realistic";
@@ -19,7 +20,7 @@ const QuizFinished = () => {
     const quizFinished = localStorage.getItem("quiz_finished");
     const correctAnswers = localStorage.getItem("correct_answers");
     setTotalCorrectAnswers(Number(correctAnswers))
-    const score = (correctAnswers / 20) * 100;
+    const score = (correctAnswers / count) * 100;
 
     setScore(score);
 
@@ -42,7 +43,7 @@ const QuizFinished = () => {
             <CircularProgressbar value={score} text={`${score}%`} className="w-32 h-32" minValue={0} styles={buildStyles({ textColor: "white", backgroundColor: "#659614", pathColor: "white", trailColor: "transparent" })} background backgroundPadding={5} />
             <div className="flex flex-col">
               <span className='font-light'>Your score is: <span className="font-medium">{score}%</span> out of 100%</span>
-              <span className='font-light'>Correct Answers: <span className="font-medium">{totalCorrectAnswers}</span> out of 20</span>
+              <span className='font-light'>Correct Answers: <span className="font-medium">{totalCorrectAnswers}</span> out of {count}</span>
             </div>
           </div>
 
