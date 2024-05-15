@@ -55,19 +55,17 @@
 "use server";
 
 import { generateObject } from "ai";
-import { openai, createOpenAI } from "@ai-sdk/openai";
+import { openai} from "@ai-sdk/openai";
 import { z } from "zod";
 
 export async function generateTrivia(topic, count) {
   try {
 
-    // createOpenAI({ apiKey: process.env.OPEN_AI_KEY });
-
     const prompt_text = `Generate a short multiple-choice trivia quiz with ${count} questions and 4 options for each question about ${topic},
     the output should be expressed in JSON as an array of questions, each question should be an object with key named "question", "options" and "correctOption" \n`;
 
     const { object: quiz } = await generateObject({
-      model: openai("gpt-4-turbo"),
+      model: openai("gpt-4o"),
       prompt: prompt_text,
       schema: z.object({
         quiz: z.array(
@@ -85,7 +83,6 @@ export async function generateTrivia(topic, count) {
       frequencyPenalty: 0,
     });
 
-    // console.log("tquizext: ", quiz);
 
     if (quiz.quiz.length > 0) {
       return {
@@ -102,7 +99,6 @@ export async function generateTrivia(topic, count) {
         statusCode: 500,
       }
     }
-
 
   } catch (error) {
     console.log(error);
