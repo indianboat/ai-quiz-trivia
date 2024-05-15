@@ -37,7 +37,7 @@ const QuizFinished = () => {
   return (
     <>
       {
-        loading ? <FullPageSpinner /> : !isQuizFinished ? <NotFound /> : <>
+        loading ? <FullPageSpinner /> : !loading && !isQuizFinished ? <NotFound /> : <>
           <div className="p-10 container mx-auto text-2xl font-bold flex justify-center flex-col items-center gap-6">
             <CircularProgressbar value={score} text={`${score}%`} className="w-32 h-32" minValue={0} styles={buildStyles({ textColor: "white", backgroundColor: "#659614", pathColor: "white", trailColor: "transparent" })} background backgroundPadding={5} />
             <div className="flex flex-col">
